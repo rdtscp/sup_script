@@ -1,0 +1,25 @@
+{
+  "name": "My Extension",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "This is a short description for our Chrome extension",
+  "background": {
+    "default_background":"background.html",
+    "scripts": [ "background.js" ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup":"popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "sessions",
+    "background"
+  ],
+  "content_scripts": [{
+      "matches": ["*://*/*"],
+      "js": ["content.js"]
+    }]
+}
