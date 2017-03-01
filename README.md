@@ -1,5 +1,5 @@
-*## Disclaimer ##
-I am in now way responsible for the consequences of using this extension. It is still experimental and not robust. That said I use it myself with confidence and it has been through some testing.*
+# **Disclaimer** # 
+*I am in now way responsible for the consequences of using this extension. It is still experimental and not robust. That said I use it myself with confidence and it has been through some testing.*
 
 ### **Supreme auto-checkout Chrome Extension** ###
 
