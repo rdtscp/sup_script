@@ -8,7 +8,8 @@
 
 ### Set Up. ###
 
-* Code should not be edited.
+* Enter your preferences in the "content.js" file.
+* Don't edit the code. Only edit where told.
 * Instructions in the code for where to enter your details.
 * Only preferences at the moment are desired size, and 'mode'.
 * Desired size means it will only check out that size.
