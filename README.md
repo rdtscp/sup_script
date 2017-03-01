@@ -1,28 +1,18 @@
-# README #
+*## Disclaimer ##
+I am in now way responsible for the consequences of using this extension. It is still experimental and not robust. That said I use it myself with confidence and it has been through some testing.*
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
+### **Supreme auto-checkout Chrome Extension** ###
 
 * Chrome Extension to simulate one click checkout on supremenewyork
 * 1.0
 
-### How do I get set up? ###
+### Set Up. ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Code should not be edited.
+* Instructions in the code for where to enter your details.
+* Only preferences at the moment are desired size, and 'mode'.
+* Desired size means it will only check out that size.
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+# Modes #
+* [0] Drop day - script will only checkout item if its past 11:00:03am.
+* [1] Restock mode - If on a product page of a sold out item, script will continually refresh until a size becomes available, and then checkout instantly.
