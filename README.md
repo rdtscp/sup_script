@@ -4,7 +4,7 @@
 ### **Supreme auto-checkout Chrome Extension** ###
 
 * Chrome Extension to simulate one click checkout on supremenewyork
-* 1.0
+* Version 1.0
 
 ### Set Up. ###
 
