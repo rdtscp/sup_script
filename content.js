@@ -36,7 +36,7 @@
  *
  * Set mode here:
  *   0 = Drop day, enable this if you want to succesfully cart after a drop.
- *   1 = Restock mode, 
+ *   1 = Restock mode. _-*WARNING*-_ This setting does not work anymore.
  */
 
 
@@ -58,7 +58,7 @@ var UKexpmonth 	= 	'12'; 						// Expiry month. ***Must be 2 digit format***
 var UKexpyear 	= 	'2019'; 					// Expiry year. ***Must be 4 digit format***
 // Script details.
 var desiredSize = "Large"; 						// SET YOUR SIZE HERE - Refer to INSTRUCTIONS above.
-var mode = "1";									// SET YOUR MODE HERE - Refer to INSTRUCTIONS above.
+var mode = "0";									// SET YOUR MODE HERE - Refer to INSTRUCTIONS above.
 
 
 /*
@@ -86,6 +86,20 @@ var mode = "1";									// SET YOUR MODE HERE - Refer to INSTRUCTIONS above.
  |___/\___/_||_\__| \__|_||_\__,_|_||_\__, \___| |_.__/\___|_\___/\_/\_/ 
                                       |___/                              
 */
+
+// Gets the captcha response token as a string.
+var token;
+var xhr = new XMLHttpRequest();
+xhr.open('GET', chrome.extension.getURL('g-recaptcha-response.txt'), false);
+xhr.onreadystatechange = function()
+{
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
+    {
+        //... The content has been read in xhr.responseText
+        token = (xhr.responseText);
+    }
+};
+xhr.send();
 
 
 // Find out if on product page by checking for element "size"
@@ -136,12 +150,16 @@ function goToCart() {
 	clearInterval(setSize);
 }
 
+var sentPOST = false;
+
 
 // If on checkout page
 var onInfoPage = setInterval( function() { // Continually fill details and try to checkout.
 	if (document.getElementById("checkout_form")) {
 		fillDetailsUK();
-		processPayment();
+		if (!sentPOST) {
+			processPayment();
+		}
 	}
 }, 250);
 
@@ -170,18 +188,17 @@ function processPayment() {
 	var processPayment = document.getElementById("checkout_form");
 	var date 	= new Date();
 	var seconds = date.getSeconds();
-	setInterval( function () {
-		// If we are buying on drop day.
-		if (mode == 0) {
-			// Dont checkout unless item released for more than 3 seconds.
-			if (seconds > 3) {
-				processPayment.submit();
-			} else {
-				// Do not check out yet, let script continue until legit checkout time.
-			}
-		// If we are in restock mode, checkout instantly.
-		}else {
-			processPayment.submit();	
-		}
-	}, 250)
+	// If we are buying on drop day.
+	if (mode == 0) {
+		// Dont checkout unless item released for more than 3 seconds.
+		sendHttpPostCheckout();
+		sentPOST = true;
+	// If we are in restock mode, checkout instantly.
+	}else {
+		console.log("Restock mode has been patched.")	
+	}
+}
+
+function sendHttpPostCheckout() {
+	console.log("Pretend we have sent it with captcha response = " + token);
 }
