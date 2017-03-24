@@ -16,4 +16,4 @@
 
 # Modes #
 * [0] Drop day - script will only checkout item if its past 11:00:03am.
-* [1] Restock mode - If on a product page of a sold out item, script will continually refresh until a size becomes available, and then checkout instantly.
+* [1] Restock mode [BROKEN]- If on a product page of a sold out item, script will continually refresh until a size becomes available, and then checkout instantly. (With the inclusion of a captcha on their site, autocheckout upon product restock cannot be done without completing a captcha).
