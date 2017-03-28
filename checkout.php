@@ -11,6 +11,10 @@
 
 - Less than 2 minutes before the drop, visit this webpage, and complete a captcha.
 
+<br></br>
+<a href="/checkout.php">Drag me to bookmark bar to save this page.
+</a>
+
 <br></br><br></br>
 
 <button type="button" onclick="updateFilepath()"> Update Extension Filepath </button>
