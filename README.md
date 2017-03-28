@@ -21,7 +21,7 @@
 
 ### Drop Day Instructions. ###
 
-* [WARNING] Version 1.1 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]
+* **[WARNING] Version 1.1 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]**
 * Make sure all of "Set Up" has been completed, and that you can access checkout.php
 * No earlier than 2 minutes before the drop, go to checkout.php, and use the "Update Extension Filepath" button to enter the filepath of the root directory of the extension folder. For example: C:\Users\JohnSmith\Documents\sup_script
 * Then complete a captcha, and click "Transfer Google Captcha Token"
