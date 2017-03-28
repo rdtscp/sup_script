@@ -47,12 +47,13 @@ var UKemail 	=	'jsmith@email.com'; 			// Email address.
 var UKtel 		=	'01234567890'; 			// UK Phone number
 var UKaddr1		=	'1 Makebelieve Street'; 			// UK street number and address.
 var UKaddr2		=	''; 						// Possible second line of address.
+var UKaddr3		=	'';
 var UKcity 		=	'Atlantis'; 					// City name.
 var UKpostcode 	= 	'AT12 3LA'; 				// City postcode.
 var UKcountry 	= 	'GB'; 						// Leave this.
 // Billing details.
 var UKcardtype 	=	'visa'; 					// visa or american_express or master. // Not tested with american_express or master.
-var UKcardnumb 	= 	'1324567812345678'; 	// 16 Digit card number. ***Must be 16 digits, no spaces***
+var UKcardnumb 	= 	'1324 5678 1234 5678'; 	// 16 Digit card number. ***Must be 16 digits, no spaces***
 var UKcnv 		= 	'123';				// 3 Digit CVV. ***Must be 3 digits***
 var UKexpmonth 	= 	'12'; 						// Expiry month. ***Must be 2 digit format***
 var UKexpyear 	= 	'2019'; 					// Expiry year. ***Must be 4 digit format***
@@ -100,6 +101,8 @@ xhr.onreadystatechange = function()
     }
 };
 xhr.send();
+
+
 
 
 // Find out if on product page by checking for element "size"
@@ -150,38 +153,12 @@ function goToCart() {
 	clearInterval(setSize);
 }
 
-var sentPOST = false;
-
-
 // If on checkout page
 var onInfoPage = setInterval( function() { // Continually fill details and try to checkout.
 	if (document.getElementById("checkout_form")) {
-		fillDetailsUK();
-		if (!sentPOST) {
-			processPayment();
-		}
+		processPayment();
 	}
 }, 250);
-
-
-// // Fill details on UK page
-function fillDetailsUK(){
-	document.getElementById("order_billing_name").value = UKname; 
-	document.getElementById("order_email").value = UKemail;
-	document.getElementById("order_tel").value = UKtel;
-	document.getElementById("bo").value = UKaddr1;
-	document.getElementById("order_billing_city").value = UKcity;
-	document.getElementById("order_billing_zip").value = UKpostcode; 
-	document.getElementById("order_billing_country").value = UKcountry; 
-
-	document.getElementById("credit_card_type").value = UKcardtype; 
-	document.getElementById("cnb").value = UKcardnumb; 
-	document.getElementById("vval").value = UKcnv;
-	document.getElementById("credit_card_month").value = UKexpmonth;
-	document.getElementById("credit_card_year").value = UKexpyear;
-
-	document.getElementById("order_terms").checked = true;
-}
 
 // Click "process payment"
 function processPayment() {
@@ -191,14 +168,156 @@ function processPayment() {
 	// If we are buying on drop day.
 	if (mode == 0) {
 		// Dont checkout unless item released for more than 3 seconds.
-		sendHttpPostCheckout();
-		sentPOST = true;
+		if (seconds > 3) {
+			setInterval( function() {
+				checkout();
+			}, 500);
+		}
 	// If we are in restock mode, checkout instantly.
-	}else {
+	} else {
 		console.log("Restock mode has been patched.")	
 	}
 }
 
-function sendHttpPostCheckout() {
-	console.log("Pretend we have sent it with captcha response = " + token);
+function checkout() {
+	// Create form
+	var form = document.createElement("form");
+	form.id="checkout_form";
+	form.setAttribute("class", "simple_form new_order");
+	form.setAttribute("novalidate", "novalidate");
+	form.setAttribute("action", "/checkout");
+	form.setAttribute("accept-charset", "UTF-8");
+	form.setAttribute("method", "post");
+
+	// Hidden inputs.
+	var charset = document.createElement("input");
+	charset.setAttribute("name", "utf8");
+	charset.setAttribute("value", "✓");
+	charset.setAttribute("type", "hidden");
+	form.appendChild(charset);
+
+	var curr_auth_token = document.getElementsByName("csrf-token")[0].content;
+	var auth_token = document.createElement("input");
+	auth_token.setAttribute("name", "authenticity_token");
+	auth_token.setAttribute("value", curr_auth_token);
+	auth_token.setAttribute("type", "hidden");
+	form.appendChild(auth_token);
+
+	// Name + Address Details:
+	var order_name = document.createElement("input");
+	order_name.setAttribute("name", "order[billing_name]");
+	order_name.setAttribute("value", UKname);
+	form.appendChild(order_name);
+
+	var order_email = document.createElement("input");
+	order_email.setAttribute("name", "order[email");
+	order_email.setAttribute("value", UKemail);
+	form.appendChild(order_email);
+
+	var order_tel = document.createElement("input");
+	order_tel.setAttribute("name", "order[tel]");
+	order_tel.setAttribute("value", UKtel);
+	form.appendChild(order_tel);
+
+	var order_addr1 = document.createElement("input");
+	order_addr1.setAttribute("name", "order[billing_address]");
+	order_addr1.setAttribute("value", UKaddr1);
+	form.appendChild(order_addr1);
+	var order_addr2 = document.createElement("input");
+	order_addr2.setAttribute("name", "order[billing_address_2]");
+	order_addr2.setAttribute("value", UKaddr2);
+	form.appendChild(order_addr2);
+	var order_addr3 = document.createElement("input");
+	order_addr3.setAttribute("name", "order[billing_address_3]");
+	order_addr3.setAttribute("value", UKaddr3);
+	form.appendChild(order_addr3);
+
+	var order_city = document.createElement("input");
+	order_city.setAttribute("name", "order[billing_city]");
+	order_city.setAttribute("value", UKcity);
+	form.appendChild(order_city);
+
+	var order_zip = document.createElement("input");
+	order_zip.setAttribute("name", "order[billing_zip]");
+	order_zip.setAttribute("value", UKpostcode);
+	form.appendChild(order_zip);
+
+	var order_country = document.createElement("input");
+	order_country.setAttribute("name", "order[billing_country]");
+	order_country.setAttribute("value", UKcountry);
+	form.appendChild(order_country);
+
+	// Extra flags.
+	var same_as_billing_address = document.createElement("input");
+	same_as_billing_address.setAttribute("name", "same_as_billing_address");
+	same_as_billing_address.setAttribute("value", "1");
+	form.appendChild(same_as_billing_address);
+	var store_credit_id = document.createElement("input");
+	store_credit_id.setAttribute("name", "store_credit_id");
+	store_credit_id.setAttribute("value", "");
+	form.appendChild(store_credit_id);
+
+	// Credit Card info.
+	var credit_card_type = document.createElement("input");
+	credit_card_type.setAttribute("name", "credit_card[type]");
+	credit_card_type.setAttribute("value", UKcardtype);
+	form.appendChild(credit_card_type);
+
+	var credit_card_numb = document.createElement("input");
+	credit_card_numb.setAttribute("name", "credit_card[cnb]");
+	credit_card_numb.setAttribute("value", UKcardnumb);
+	form.appendChild(credit_card_numb);
+
+	var cc_month = document.createElement("input");
+	cc_month.setAttribute("name", "credit_card[month]");
+	cc_month.setAttribute("value", UKexpmonth);
+	form.appendChild(cc_month);
+
+	var cc_year = document.createElement("input");
+	cc_year.setAttribute("name", "credit_card[year]");
+	cc_year.setAttribute("value", UKexpyear);
+	form.appendChild(cc_year);
+
+	var cc_vval = document.createElement("input");
+	cc_vval.setAttribute("name", "credit_card[vval]");
+	cc_vval.setAttribute("value", UKcnv);
+	form.appendChild(cc_vval);
+
+	// Misc order terms.
+	var order_terms = document.createElement("input");
+	order_terms.setAttribute("name", "order[terms]");
+	order_terms.setAttribute("value", "0");
+	order_terms.setAttribute("type", "hidden");
+	form.appendChild(order_terms);
+
+	var order_terms_div = document.createElement("div");
+	order_terms_div.setAttribute("class", "icheckbox_minimal checked")
+	order_terms_div.setAttribute("style", "position: relative;");
+	form.appendChild(order_terms_div)
+
+	var order_terms2 = document.createElement("input");
+	order_terms2.id="order_terms";
+	order_terms2.setAttribute("class", "checkbox");
+	order_terms2.setAttribute("value", "1");
+	order_terms2.setAttribute("checked", "checked");
+	order_terms2.setAttribute("name", "order[terms]");
+	order_terms2.setAttribute("style", "position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;");
+	order_terms2.setAttribute("type", "checkbox");
+	order_terms_div.appendChild(order_terms2);
+
+
+	// google recaptcha response.
+	var order_name = document.createElement("input");
+	order_name.setAttribute("name", "g-recaptcha-response");
+	order_name.setAttribute("value", token);
+	form.appendChild(order_name);
+
+	var order_name = document.createElement("input");
+	order_name.setAttribute("name", "hpcvv");
+	order_name.setAttribute("value", "");
+	form.appendChild(order_name);
+
+	// Add to page.
+	document.body.appendChild(form);
+	form.submit();
 }
