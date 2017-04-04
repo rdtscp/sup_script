@@ -32,3 +32,6 @@
 * [0] Complete Checkout - Script will attempt to checkout an item fully for you.
 * [1] Go to Cart (with Captcha) - Script will take you to the checkout page, and replace the captcha response input on the checkout form, but **will not** complete checkout.
 * [2] Go to Cart (without Captcha) - Script will take you to checkout page, but you will be required to complete a captcha to checkout as the script will only attempt to autofill your details.
+
+###Note###
+A captcha response is only valid for **one** cart checkout.
