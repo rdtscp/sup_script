@@ -1,8 +1,8 @@
 {
-  "name": "My Extension",
-  "version": "1.0",
+  "name": "Supreme Autocheckout",
+  "version": "1.1",
   "manifest_version": 2,
-  "description": "This is a short description for our Chrome extension",
+  "description": "Extension designed to enable different modes of add to cart and auto checkout for supreme webstore.",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup":"popup.html"
@@ -11,11 +11,15 @@
     "tabs",
     "activeTab",
     "sessions",
-    "background"
+    "background",
+    "storage"
   ],
   "web_accessible_resources": [
     "g-recaptcha-response.txt"
   ],
+  "options_ui": {
+    "page": "options.html"
+  },
   "content_scripts": [{
       "matches": ["*://*/*"],
       "js": ["content.js"]
