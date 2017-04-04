@@ -6,7 +6,7 @@
 * Firefox Extension to simulate one click checkout on supremenewyork
 * Version 1.2 **VERSION 1.2 HAS NOT BEEN TESTED IN REAL CONDITIONS YET, USE AT YOUR OWN RISK**
 
-### Set Up. ###
+# Set Up. #
 
 1. Firstly, set up your machine to be able to host an Apache server using an application like MAMP or XAMPP.
 2. Place the "checkout.php" file into the htdocs folder of XAMPP.
