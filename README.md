@@ -17,9 +17,8 @@
 7. Don't edit the code.
 8. Desired size means it will only check out that size.
 
-
-* **[WARNING] Version 1.2 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]**
 # Drop Day Instructions. #
+* **[WARNING] Version 1.2 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]**
 ### Manual Captcha Setting ###
 1. In the Firefox add-on settings, you can set "Use Above Token" to 'true' and press "Save", to enter your desired re-captcha response token.
 2. Upon visiting "dev.supremenewyork.com/checkout.php" you will simply complete a captcha(no earlier than 2 minutes before drop).
