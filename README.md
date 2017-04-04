@@ -1,7 +1,7 @@
 **Disclaimer** 
 *I am in now way responsible for the consequences of using this extension. It is still experimental and not robust. That said I use it myself with confidence and it has been through some testing.*
 
-### **Supreme auto-checkout Firefox Extension(Chrome not supported in v1.2)** ###
+# **Supreme auto-checkout Firefox Extension(Chrome not supported in v1.2)** #
 
 * Firefox Extension to simulate one click checkout on supremenewyork
 * Version 1.2 **VERSION 1.2 HAS NOT BEEN TESTED IN REAL CONDITIONS YET, USE AT YOUR OWN RISK**
@@ -17,7 +17,7 @@
 7. Don't edit the code.
 8. Desired size means it will only check out that size.
 
-### Drop Day Instructions. ###
+# Drop Day Instructions. #
 
 * **[WARNING] Version 1.2 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]**
 
