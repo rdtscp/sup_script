@@ -1,34 +1,37 @@
 **Disclaimer** 
 *I am in now way responsible for the consequences of using this extension. It is still experimental and not robust. That said I use it myself with confidence and it has been through some testing.*
 
-### **Supreme auto-checkout Chrome Extension** ###
+### **Supreme auto-checkout Firefox Extension(Chrome not supported in v1.2)** ###
 
-* Chrome Extension to simulate one click checkout on supremenewyork
-* Version 1.1 **VERSION 1.1 HAS NOT BEEN TESTED IN REAL CONDITIONS YET, USE AT YOUR OWN RISK**
+* Firefox Extension to simulate one click checkout on supremenewyork
+* Version 1.2 **VERSION 1.2 HAS NOT BEEN TESTED IN REAL CONDITIONS YET, USE AT YOUR OWN RISK**
 
 ### Set Up. ###
 
-* Firstly, set up your machine to be able to host an Apache server using an application like MAMP or XAMPP.
-* Place the "checkout.php" file into the htdocs folder of XAMPP.
-* In google chrome, go to Settings > Extensions and check "Developer Mode".
-* Then click "Load unpacked extension..." and select the root directory of this repo(by default the folder should be called sup_script).
-* Remember to uncheck "Enabled" if you don't want to auto checkout anything you visit on supremes website.
-* Enter your preferences in the "content.js" file.
-* Don't edit the code. Only edit where told.
-* Instructions in the code for where to enter your details.
-* Only preferences at the moment are desired size, and 'mode'.
-* Desired size means it will only check out that size.
+1. Firstly, set up your machine to be able to host an Apache server using an application like MAMP or XAMPP.
+2. Place the "checkout.php" file into the htdocs folder of XAMPP.
+3. Edit your hosts file to map '127.0.0.1' to 'dev.supremenewyork.com'.
+3. In firefox, go to "about:debugging" and click "Load Temporary Add-on".
+4. Then click any file in the directory of this repo(by default the root folder should be called sup_script).
+5. Go to "about:addons", and under the add-on, click "Options" to access option menu.
+7. Don't edit the code.
+8. Desired size means it will only check out that size.
 
 ### Drop Day Instructions. ###
 
-* **[WARNING] Version 1.1 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]**
-* Make sure all of "Set Up" has been completed, and that you can access checkout.php
-* No earlier than 2 minutes before the drop, go to checkout.php, and use the "Update Extension Filepath" button to enter the filepath of the root directory of the extension folder. For example: C:\Users\JohnSmith\Documents\sup_script
-* Then complete a captcha, and click "Transfer Google Captcha Token"
-* This will grant you ONE cart checkout for roughly a two minute window.
-* The next step is to make sure that the script is enabled and your correct details are stored in the script.
-* Refresh supremenewyork.com/shop/all at 11:00am and click on the product you want. If you know the product wont be available in the Size you specified earlier, then you will have to manually click "Add to Cart", and then the script will take over. Else the script will cart your desired size and continue to checkout.
+* **[WARNING] Version 1.2 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]**
+
+## Manual Captcha Setting ##
+1. In the Firefox add-on settings, you can set "Use Above Token" to 'true' and press "Save", to enter your desired re-captcha response token.
+2. Upon visiting "dev.supremenewyork.com/checkout.php" you will simply complete a captcha(no earlier than 2 minutes before drop).
+3. Copy the response that is displayed in the text box, and enter it into the "Google Captcha Token" field on the add-on options and press "Save".
+
+### Auto Captcga Setting ##
+1. In the Firefox add-on settings, you can set "Use Above Token" to 'false' and press "Save", to have the captcha field populated automatically.
+2. Upon visiting "dev.supremenewyork.com/checkout.php" you will have to enter the filepath to the root directory of the add on folder using "Update Extension Filepath" button.
+3. Complete a captcha no earlier than 2 minutes prior to the drop, and use the add-on as per usual.
 
 # Modes #
-* [0] Drop day - script will only checkout item if its past 11:00:03am.
-* [1] Restock mode [BROKEN; The addition of a captcha to supremes website now means that this script cannot be left to try to cart an item for itself, as a captcha is required to complete checkout.]- If on a product page of a sold out item, script will continually refresh until a size becomes available, and then checkout instantly. (With the inclusion of a captcha on their site, autocheckout upon product restock cannot be done without completing a captcha).
+* [0] Complete Checkout - Script will attempt to checkout an item fully for you.
+* [1] Go to Cart (with Captcha) - Script will take you to the checkout page, and replace the captcha response input on the checkout form, but **will not** complete checkout.
+* [2] Go to Cart (without Captcha) - Script will take you to checkout page, but you will be required to complete a captcha to checkout as the script will only attempt to autofill your details.
