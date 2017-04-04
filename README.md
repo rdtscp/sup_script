@@ -26,7 +26,7 @@
 2. Upon visiting "dev.supremenewyork.com/checkout.php" you will simply complete a captcha(no earlier than 2 minutes before drop).
 3. Copy the response that is displayed in the text box, and enter it into the "Google Captcha Token" field on the add-on options and press "Save".
 
-### Auto Captcga Setting ##
+## Auto Captcha Setting ##
 1. In the Firefox add-on settings, you can set "Use Above Token" to 'false' and press "Save", to have the captcha field populated automatically.
 2. Upon visiting "dev.supremenewyork.com/checkout.php" you will have to enter the filepath to the root directory of the add on folder using "Update Extension Filepath" button.
 3. Complete a captcha no earlier than 2 minutes prior to the drop, and use the add-on as per usual.
