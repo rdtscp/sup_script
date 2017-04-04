@@ -30,7 +30,7 @@
 2. Upon visiting "dev.supremenewyork.com/checkout.php" you will have to enter the filepath to the root directory of the add on folder using "Update Extension Filepath" button.
 3. Complete a captcha no earlier than 2 minutes prior to the drop, and use the add-on as per usual.
 
-# Modes #
+### Modes ###
 * [0] Complete Checkout - Script will attempt to checkout an item fully for you.
 * [1] Go to Cart (with Captcha) - Script will take you to the checkout page, and replace the captcha response input on the checkout form, but **will not** complete checkout.
 * [2] Go to Cart (without Captcha) - Script will take you to checkout page, but you will be required to complete a captcha to checkout as the script will only attempt to autofill your details.
