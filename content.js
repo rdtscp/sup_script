@@ -25,7 +25,7 @@ var UKcnv;
 var UKexpmonth;
 var UKexpyear;
 var desiredSize;
-var token =  "foo";
+var token;
 var mode;
 var man_token;
 
@@ -43,7 +43,7 @@ function getToken() {
 	    }
 	};
 	xhr.send();
-	console.log("Obtained re-captcha token");
+	console.log("    ✔ Obtained re-captcha token");
 }
 
 // Go to checkout page.
@@ -63,7 +63,9 @@ function onError(error) {
 
 // Retrieves user data and starts script.
 function onGot(item) {
+	console.log("Getting user details.")
 	UKname 		=	item.order_billing_name;
+	console.log("    ✔ Name = " + item.order_billing_name);
 	UKemail 	=	item.order_email;
 	UKtel 		=	item.order_tel;
 	UKaddr1		=	item.bo;
@@ -93,56 +95,29 @@ function onGot(item) {
 
 	if (pathname != "/checkout" && pathname.length > 25) {	// If we are on product page.
 		console.log("[STATUS]: On product page.")
-		// Set size to Large
-		var sizeList = document.getElementById("size");
-		var currentSize = sizeList.options[sizeList.selectedIndex].textContent;
-		var currentSizeId = sizeList.options[sizeList.selectedIndex].value;
-		console.log("Attempting to set size");
-		if (desiredSize == "Small") {
-			if (currentSize == "Small") {
-				console.log("Attempting to ADD-TO-CART");
-				document.getElementsByTagName('input')[2].click();
-				console.log("Clicked ADD-TO-CART");
-			}	
-		}
-		else if (desiredSize == "Medium") {
-			if (currentSize == "Small") {
-				sizeList.value = parseInt(currentSizeId) + 1;
-				console.log("    ✔ Size set to Medium");
-			}
-			var currentSize = sizeList.options[sizeList.selectedIndex].textContent;
-			if (currentSize == "Medium") {
-				console.log("Attempting to ADD-TO-CART");
-				document.getElementsByTagName('input')[2].click();
-				console.log("Clicked ADD-TO-CART");
-			}	
-		}
-		else if (desiredSize == "Large") {
-			if (currentSize == "Small") {
-				sizeList.value = parseInt(currentSizeId) + 2;
-				console.log("    ✔ Size set to Large");
-			} else if (currentSize == "Medium") {
-				sizeList.value = parseInt(currentSizeId) + 1;
-				console.log("    ✔ Size set to Large");
-			}
-			var currentSize = sizeList.options[sizeList.selectedIndex].textContent;
-			if (currentSize == "Large") {
-				console.log("Attempting to ADD-TO-CART");
-				document.getElementsByTagName('input')[2].click();
-				console.log("Clicked ADD-TO-CART");
-			}	
-		}
-
-		console.log("Checking to see if we have added to cart...")
-		var check_added = setInterval( function() {
-			//document.getElementsByTagName('input')[2].click();
+		console.log("Attemping to set size to " + desiredSize);
+		var add_to_cart = setInterval( function() {
 			if (document.getElementById("cart-remove")) {
 				console.log("    ✔  ADDED TO CART");
 				console.log("Attempting to visit checkout page...");
-				clearInterval(check_added);
+				clearInterval(add_to_cart);
 				goToCart();
 			}
-		}, 250);	
+			console.log("Start interval");
+			var sizeList = document.getElementById("size");
+			var currentSize = sizeList.options[sizeList.selectedIndex].textContent;
+			var currentSizeId = sizeList.options[sizeList.selectedIndex].value;
+			console.log("Current Size = " + currentSize);
+			if (currentSize != desiredSize) {
+				sizeList.value = parseInt(currentSizeId) + 1;
+			}
+			if (currentSize == desiredSize) {
+				console.log("Attempting to ADD-TO-CART.")
+				document.getElementsByTagName('input')[2].click();
+				console.log("Clicked ADD-TO-CART");
+			}
+		}, 1000);
+
 	}
 	else if (pathname == "/checkout") {
 		console.log("[STATUS]: On checkout page");
@@ -210,19 +185,6 @@ var check_page = setInterval( function(){
 	}
 }, 250);
 
-
-
-
-
-// If on checkout page
-// var onInfoPage = setInterval( function() { // Continually fill details and try to checkout.
-// 	console.log("Looking for checkout page");
-// 	if (document.getElementById("checkout_form")) {
-// 		fillForm();
-// 		console.log("Filling form DONEEEEEEEEEE");
-// 		//processPayment();
-// 	}
-// }, 350);
 
 // Fill out form and replace captcha response.
 function fillForm() {
