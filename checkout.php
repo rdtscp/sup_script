@@ -42,7 +42,7 @@
 		}
 	</style>
 </head>
-<body style="font-family: Consolas" onload="initPage()">
+<body style="font-family: Consolas;" onload="initPage()">
 	<div style="text-align: center; margin: auto;">
 		<h1> Introduction </h1>
 		<p>
@@ -73,16 +73,23 @@
 		<hr>
 		<br/>
 		<button type="button" onclick="updateFilepath()"> Update Extension Filepath </button>
+		<br/>
+		<?php
+		if (!empty($_COOKIE["filepath"])) {
+			echo 'Current filepath = ' . $_COOKIE["filepath"];
+		}
+		?>
+		<br/>
 	</div>
 	<br/>
 
 	<!-- Checkboxes to enable/disable certain functions. -->
 	<div style="width: 900px; text-align: center; margin: auto;">
 		<div class="leftColumn">
-			<input id="hard_data_xbox" type="checkbox" value="0" onchange="enableUserData()" checked="false">Enable User Data
+			<input id="hard_data_xbox" type="checkbox" value="0" onclick="enableUserData()" checked="false">Show User Data Form
 		</div>
 		<div class="rightColumn">
-			<input id="bypass_recpatcha_xbox" type="checkbox" value="0" onchange="enableCaptchaBypass()" checked="false">Enable Captcha Bypass
+			<input id="bypass_recpatcha_xbox" type="checkbox" value="0" onchange="enableCaptchaBypass()" checked="false">Show Captcha Bypass
 		</div>
 	</div>
 	<br/>
@@ -90,8 +97,10 @@
 	<!-- Divs to hold forms for storing information. -->
 	<div style="width: 900px; text-align: center; margin: auto;">
 		<!-- Div for holding user data elements. -->
-		<div id="hard_data_div" class="leftColumn">
+		<div id="hard_data_div" class="leftColumn" style="visibility: hidden">
 			<form action='/savedata.php' method='post'>
+
+				<input name="rqst_type" value="data" style="visibility: hidden;">
 
 				<div class="container" style="display: inline-block; text-align: left;">
 
@@ -184,13 +193,24 @@
 						<option value="2027">2027</option><br/>
 					</select><br/>
 					cvv		<input name="UKcnv" type="text" maxlength="4" size="4"><br/>
-					<input type='submit' value='Save Details' name='save' id='save'/>
+					<input type='submit' value='Save Details'/>
 				</div>
 			</form>
+			<form action='/savedata.php' method='post'>
+				<input name="rqst_type" value="settings" style="visibility: hidden;">
+				<input name="enabled" value="true" style="visibility: hidden;">
+				<input type='submit' value='Enable Hard Coded Data'/>
+			</form>
+			<form action='/savedata.php' method='post'>
+				<input type='submit' value='Disable Hard Coded Data'/>
+				<input name="rqst_type" value="settings" style="visibility: hidden;">
+				<input name="enabled" value="false" style="visibility: hidden;">
+			</form>
+			
 		</div>
 
 		<!-- Div for holding captcha bypass elements. -->
-		<div id="captcha_bypass_div" class="rightColumn">
+		<div id="captcha_bypass_div" class="rightColumn" style="visibility: hidden">
 			<form action='/checkout.php' method='post'>
 				<br/>
 				<div class="container" style="display: inline-block; text-align: left;">
@@ -211,8 +231,8 @@
 						fwrite($file, $response);
 						fclose($file);
 					}
-					echo '<textarea class="box">'. $response . '</textarea><br><br>';
-					echo "Current filepath =" . $filepath ;
+					echo '<textarea class="box" style="width: 400px; height: 200px;">'. $response . '</textarea><br><br>';
+					//echo "Current filepath =" . $filepath ;
 					echo '<script>
 					document.cookie = "g-recaptcha-response=" + "' . $_POST["g-recaptcha-response"] . '";
 				</script>
@@ -226,64 +246,66 @@
 
 <script>
 	function initPage() {
-			document.getElementsByName("UKname")[0].value =  decodeURIComponent((getCook("UKname") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKemail")[0].value =  decodeURIComponent((getCook("UKemail") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKtel")[0].value =  decodeURIComponent((getCook("UKtel") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKaddr1")[0].value =  decodeURIComponent((getCook("UKaddr1") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKaddr2")[0].value =  decodeURIComponent((getCook("UKaddr2") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKaddr3")[0].value =  decodeURIComponent((getCook("UKaddr3") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKcity")[0].value =  decodeURIComponent((getCook("UKcity") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKzip")[0].value =  decodeURIComponent((getCook("UKzip") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKcountry")[0].value =  decodeURIComponent((getCook("UKcountry") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKcardtype")[0].value =  decodeURIComponent((getCook("UKcardtype") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKcardnumb")[0].value =  decodeURIComponent((getCook("UKcardnumb") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKexpmonth")[0].value =  decodeURIComponent((getCook("UKexpmonth") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKexpyear")[0].value =  decodeURIComponent((getCook("UKexpyear") + '').replace(/\+/g, '%20'));
-			document.getElementsByName("UKcnv")[0].value =  decodeURIComponent((getCook("UKcnv") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKname")[0].value =  decodeURIComponent((getCook("UKname") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKemail")[0].value =  decodeURIComponent((getCook("UKemail") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKtel")[0].value =  decodeURIComponent((getCook("UKtel") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKaddr1")[0].value =  decodeURIComponent((getCook("UKaddr1") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKaddr2")[0].value =  decodeURIComponent((getCook("UKaddr2") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKaddr3")[0].value =  decodeURIComponent((getCook("UKaddr3") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKcity")[0].value =  decodeURIComponent((getCook("UKcity") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKzip")[0].value =  decodeURIComponent((getCook("UKzip") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKcountry")[0].value =  decodeURIComponent((getCook("UKcountry") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKcardtype")[0].value =  decodeURIComponent((getCook("UKcardtype") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKcardnumb")[0].value =  decodeURIComponent((getCook("UKcardnumb") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKexpmonth")[0].value =  decodeURIComponent((getCook("UKexpmonth") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKexpyear")[0].value =  decodeURIComponent((getCook("UKexpyear") + '').replace(/\+/g, '%20'));
+		document.getElementsByName("UKcnv")[0].value =  decodeURIComponent((getCook("UKcnv") + '').replace(/\+/g, '%20'));
+		document.getElementById("hard_data_xbox").checked = false;
+		document.getElementById("bypass_recpatcha_xbox").checked = false;
+	}
+
+	function updateFilepath() {
+		var filepath = prompt("Enter filepath to root directory of extension");
+		var payload  = filepath.replace(/\\/g,"/")
+		document.cookie = "filepath=" + payload;
+		location.reload();
+	}
+
+	function enableUserData() {
+		var currVal = document.getElementById("hard_data_xbox").value;
+		currVal++;
+		if (currVal > 1) { currVal = 0; }
+		document.getElementById("hard_data_xbox").value = currVal;
+		if (currVal == 0) {
+			document.getElementById("hard_data_div").style.visibility="hidden";
 			document.getElementById("hard_data_xbox").checked = false;
+		} else {
+			document.getElementById("hard_data_xbox").checked = true;
+			document.getElementById("hard_data_div").style.visibility="visible";
+		}
+	} 
+
+	function enableCaptchaBypass() {
+		var currVal = document.getElementById("bypass_recpatcha_xbox").value;
+		currVal++;
+		if (currVal > 1) { currVal = 0; }
+		document.getElementById("bypass_recpatcha_xbox").value = currVal;
+		if (currVal == 0) {
+			document.getElementById("captcha_bypass_div").style.visibility="hidden";
 			document.getElementById("bypass_recpatcha_xbox").checked = false;
+		} else {
+			document.getElementById("bypass_recpatcha_xbox").checked = true;
+			document.getElementById("captcha_bypass_div").style.visibility="visible";
 		}
+	}
 
-		function updateFilepath() {
-			var filepath = prompt("Enter filepath to root directory of extension");
-			document.cookie = "filepath=" + filepath;
-		}
+	function getCook(cookiename) {
+	  	// Get name followed by anything except a semicolon
+	  	var cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);
+	  	// Return everything after the equal sign, or an empty string if the cookie name not found
+	  	return unescape(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
+	}
+</script>
 
-		function enableUserData() {
-			var currVal = document.getElementById("hard_data_xbox").value;
-			currVal++;
-			if (currVal > 1) { currVal = 0; }
-			document.getElementById("hard_data_xbox").value = currVal;
-			if (currVal == 0) {
-				document.getElementById("hard_data_div").style.visibility="hidden";
-				document.getElementById("hard_data_xbox").checked = false;
-			} else {
-				document.getElementById("hard_data_xbox").checked = true;
-				document.getElementById("hard_data_div").style.visibility="visible";
-			}
-		} 
-
-		function enableCaptchaBypass() {
-			var currVal = document.getElementById("bypass_recpatcha_xbox").value;
-			currVal++;
-			if (currVal > 1) { currVal = 0; }
-			document.getElementById("bypass_recpatcha_xbox").value = currVal;
-			if (currVal == 0) {
-				document.getElementById("captcha_bypass_div").style.visibility="hidden";
-				document.getElementById("bypass_recpatcha_xbox").checked = false;
-			} else {
-				document.getElementById("bypass_recpatcha_xbox").checked = true;
-				document.getElementById("captcha_bypass_div").style.visibility="visible";
-			}
-		}
-		
-		function getCook(cookiename) {
-		  	// Get name followed by anything except a semicolon
-		 	var cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);
-		  	// Return everything after the equal sign, or an empty string if the cookie name not found
-		  	return unescape(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
-		}
-	</script>
-
-</body>
-</html>
+	</body>
+	</html>

@@ -12,13 +12,13 @@ function getToken() {
 	    }
 	};
 	xhr.send();
-	console.log("    ✔ Obtained re-captcha token");
+	console.log("    + Obtained re-captcha token");
 }
 
 // Go to checkout page.
 function goToCart() {
 	window.open('https://www.supremenewyork.com/checkout', '_blank').focus();
-	console.log("    ✔ Opened checkout page");
+	console.log("    + Opened checkout page");
 	console.log("---------------------------------------------------------");
 	console.log("---THIS CONSOLE MAY NOT SHOW ACTIVITY ON CHECKOUT PAGE---");
 	console.log("---------------------------------------------------------");
@@ -34,7 +34,7 @@ function onError(error) {
 function onGot(item) {
 	console.log("Getting user details.")
 	UKname 		=	item.order_billing_name;
-	console.log("    ✔ Name = " + item.order_billing_name);
+	console.log("    + Name = " + item.order_billing_name);
 	UKemail 	=	item.order_email;
 	UKtel 		=	item.order_tel;
 	UKaddr1		=	item.bo;
@@ -55,7 +55,7 @@ function onGot(item) {
 		console.log("[OPT]: Using manual captcha token.");
 		token =	item.recaptcha;	
 	}
-	console.log("    ✔ Obtained user details")
+	console.log("    + Obtained user details")
 	if (!man_token) { getToken(); }
 
 	var pathname 		= window.location.pathname;
@@ -67,7 +67,7 @@ function onGot(item) {
 		console.log("Attemping to set size to " + desiredSize);
 		var add_to_cart = setInterval( function() {
 			if (document.getElementById("cart-remove")) {
-				console.log("    ✔  ADDED TO CART");
+				console.log("    +  ADDED TO CART");
 				console.log("Attempting to visit checkout page...");
 				clearInterval(add_to_cart);
 				goToCart();
@@ -93,14 +93,14 @@ function onGot(item) {
 		if (mode == 0 || mode == 1) {
 			console.log("Attempting to remove google captcha.");
 			document.getElementById("g-recaptcha-response").remove();
-			console.log("    ✔ Google captcha removed.");
+			console.log("    + Google captcha removed.");
 			console.log("Injecting google re-captcha response.");
 			var response = document.createElement("input");
 			response.setAttribute("type", "hidden");
 			response.setAttribute("name", "g-recaptcha-response");
 			response.setAttribute("value", token);
 			document.getElementById("checkout_form").appendChild(response);
-			console.log("    ✔ Injected google re-captcha response.");
+			console.log("    + Injected google re-captcha response.");
 		}
 		console.log("Filling out details.");
 		fillForm();
@@ -166,17 +166,17 @@ function fillForm() {
 	document.getElementById("order_billing_city").value = UKcity;
 	document.getElementById("order_billing_zip").value = UKpostcode; 
 	document.getElementById("order_billing_country").value = UKcountry;
-	console.log("    ✔ Filled out billing details");
+	console.log("    + Filled out billing details");
 
 	document.getElementById("credit_card_type").value = UKcardtype; 
 	document.getElementById("cnb").value = UKcardnumb; 
 	document.getElementById("vval").value = UKcnv;
 	document.getElementById("credit_card_month").value = UKexpmonth;
 	document.getElementById("credit_card_year").value = UKexpyear;
-	console.log("    ✔ Filled out credit card details");
+	console.log("    + Filled out credit card details");
 
 	document.getElementById("order_terms").checked = true;
-	console.log("    ✔ Terms Accepted");
+	console.log("    + Terms Accepted");
 }
 
 // Click "process payment"
