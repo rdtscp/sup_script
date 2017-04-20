@@ -88,7 +88,7 @@ function onGot(item) {
 				document.getElementsByTagName('input')[2].click();
 				console.log("Clicked ADD-TO-CART");
 			}
-		}, 750);
+		}, 250);
 
 	}
 	else if (pathname == "/checkout") {

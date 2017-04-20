@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style type="text/css">
+    
+    label {
+    display: inline-block;
+    width:100px;
+    text-align: right;
+    }
+
+  </style>
+</head>
+<body>
+  <form>
+    <div class="container">
+        <h2><b>billing/shipping information</b></h2>
+          <div class="input string required order_billing_name">
+            <label class="string required control-label" for="order_billing_name">full name</label><input class="string required" id="order_billing_name" name="order[billing_name]" type="text">
+          </div>
+          <div class="input email required order_email">
+            <label class="email required control-label" for="order_email">email</label><input class="string email required" id="order_email" name="order[email]" type="email">(Must contain @)
+          </div>
+          <div class="input string required order_tel">
+            <label class="string required control-label" for="order_tel">tel</label><input class="string required" id="order_tel" name="order[tel]" type="text">
+          </div>
+          <div class="input string required order_billing_address">
+            <label class="string required control-label" for="bo">address</label><input class="string required" id="bo" name="order[billing_address]" type="text">
+          </div>
+          <div class="input string optional order_billing_address_2">
+            <label class="string optional control-label no-gray-bg" for="oba3">&nbsp;</label><input class="string optional" id="oba3" name="order[billing_address_2]" type="text">
+          </div>
+          <div class="input string optional order_billing_address_3">
+            <label class="string optional control-label no-gray-bg" for="order_billing_address_3">&nbsp;</label><input class="string optional" id="order_billing_address_3" name="order[billing_address_3]" type="text">
+          </div>
+          <div class="input string required order_billing_city">
+            <label class="string required control-label" for="order_billing_city">city</label><input class="string required" id="order_billing_city" name="order[billing_city]" type="text">
+          </div>
+          <div class="input string required order_billing_zip">
+            <label class="string required control-label" for="order_billing_zip" id="zip_label">postcode</label><input class="string required" id="order_billing_zip" name="order[billing_zip]" type="text">
+          </div>
+          <div class="input select optional order_billing_country">
+            <label class="select optional control-label" for="order_billing_country">country</label><select class="select optional" id="order_billing_country" name="order[billing_country]">
+              <option value="GB">
+                UK
+              </option>
+              <option value="NB">
+                UK (N. IRELAND)
+              </option>
+              <option value="">
+                -
+              </option>
+              <option value="AT">
+                AUSTRIA
+              </option>
+              <option value="BY">
+                BELARUS
+              </option>
+              <option value="BE">
+                BELGIUM
+              </option>
+              <option value="BG">
+                BULGARIA
+              </option>
+              <option value="HR">
+                CROATIA
+              </option>
+              <option value="CZ">
+                CZECH REPUBLIC
+              </option>
+              <option value="DK">
+                DENMARK
+              </option>
+              <option value="EE">
+                ESTONIA
+              </option>
+              <option value="FI">
+                FINLAND
+              </option>
+              <option value="FR">
+                FRANCE
+              </option>
+              <option value="DE">
+                GERMANY
+              </option>
+              <option value="GR">
+                GREECE
+              </option>
+              <option value="HU">
+                HUNGARY
+              </option>
+              <option value="IS">
+                ICELAND
+              </option>
+              <option value="IE">
+                IRELAND
+              </option>
+              <option value="IT">
+                ITALY
+              </option>
+              <option value="LV">
+                LATVIA
+              </option>
+              <option value="LT">
+                LITHUANIA
+              </option>
+              <option value="LU">
+                LUXEMBOURG
+              </option>
+              <option value="MC">
+                MONACO
+              </option>
+              <option value="NL">
+                NETHERLANDS
+              </option>
+              <option value="NO">
+                NORWAY
+              </option>
+              <option value="PL">
+                POLAND
+              </option>
+              <option value="PT">
+                PORTUGAL
+              </option>
+              <option value="RO">
+                ROMANIA
+              </option>
+              <option value="RU">
+                RUSSIA
+              </option>
+              <option value="SK">
+                SLOVAKIA
+              </option>
+              <option value="SI">
+                SLOVENIA
+              </option>
+              <option value="ES">
+                SPAIN
+              </option>
+              <option value="SE">
+                SWEDEN
+              </option>
+              <option value="CH">
+                SWITZERLAND
+              </option>
+              <option value="TR">
+                TURKEY
+              </option>
+            </select>
+          </div>
+        <h2><b>credit card information</b></h2>
+          <div class="input select required credit_card_type">
+            <label class="select required control-label" for="credit_card_type">type</label><select class="select required" id="credit_card_type" name="credit_card[type]">
+              <option value="visa">
+                Visa
+              </option>
+              <option value="american_express">
+                American Express
+              </option>
+              <option value="master">
+                Mastercard
+              </option>
+              <option value="solo">
+                Solo
+              </option>
+            </select>
+          </div>
+          <div id="card_details">
+                <label>number</label><input class="string required" id="cnb" name="credit_card[cnb]" type="text" pattern="[0-9]{13,16}">(16 digits)
+            <div class="input string required credit_card_month">
+              <label class="string required control-label" for="credit_card_month">exp. date</label><select id="credit_card_month" name="credit_card[month]">
+                <option value="01">
+                  01
+                </option>
+                <option value="02">
+                  02
+                </option>
+                <option value="03">
+                  03
+                </option>
+                <option selected="selected" value="04">
+                  04
+                </option>
+                <option value="05">
+                  05
+                </option>
+                <option value="06">
+                  06
+                </option>
+                <option value="07">
+                  07
+                </option>
+                <option value="08">
+                  08
+                </option>
+                <option value="09">
+                  09
+                </option>
+                <option value="10">
+                  10
+                </option>
+                <option value="11">
+                  11
+                </option>
+                <option value="12">
+                  12
+                </option>
+              </select><select id="credit_card_year" name="credit_card[year]">
+                <option value="2017">
+                  2017
+                </option>
+                <option value="2018">
+                  2018
+                </option>
+                <option value="2019">
+                  2019
+                </option>
+                <option value="2020">
+                  2020
+                </option>
+                <option value="2021">
+                  2021
+                </option>
+                <option value="2022">
+                  2022
+                </option>
+                <option value="2023">
+                  2023
+                </option>
+                <option value="2024">
+                  2024
+                </option>
+                <option value="2025">
+                  2025
+                </option>
+                <option value="2026">
+                  2026
+                </option>
+                <option value="2027">
+                  2027
+                </option>
+              </select>
+            </div>
+            <div class="input string required credit_card_verification_value visa" id="cart-vval">
+                <label>CVV</label><input class="string required" id="vval" maxlength="4" name="credit_card[vval]" size="4" type="text">
+            </div>
+          </div>
+          </div><br><br>
+          <label>size</label>
+      <select id="size" name="size">
+        <option value="Small">
+          Small
+        </option>
+        <option value="Medium">
+          Medium
+        </option>
+        <option value="Large">
+          Large
+        </option>
+      </select><br><br>
+      <label>Mode</label><select id="mode" name="mode">
+        <option value="0">
+          Full Checkout
+        </option>
+        <option value="1">
+          Go to Cart (with captcha)
+        </option>
+        <option value="2">
+          Go to Cart (without captcha)
+        </option>
+      </select><br><br>
+       <label>Google Captcha Token</label><input id="recaptcha" name="recaptcha" type="text"><br><br>
+       <label for="man_token">Use Above Token</label>
+       <select id="man_token" name="man_token">
+        <option value="true">
+          true
+        </option>
+        <option value="false">
+          false
+        </option>
+      </select><br><br>
+       
+       <br><br>
+        <br></br>
+          
+
+      <button type="submit">Save</button>
+  </form>
+  <script src="options.js">
+  </script>
+</body>
+</html>
