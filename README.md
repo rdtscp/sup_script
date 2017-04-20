@@ -1,37 +1,61 @@
 **Disclaimer** 
 *I am in now way responsible for the consequences of using this extension. It is still experimental and not robust. That said I use it myself with confidence and it has been through some testing.*
 
-# **Supreme auto-checkout Firefox Extension(Chrome not supported in v1.2)** #
+# **Supreme auto-checkout Firefox/Chrome Extension**
 
-* Firefox Extension to simulate one click checkout on supremenewyork
-* Version 1.2 **VERSION 1.2 HAS NOT BEEN TESTED IN REAL CONDITIONS YET, USE AT YOUR OWN RISK**
+* Firefox/Chrome Extension to simulate one click add-to-cart/checkout on supremenewyork
+* Version 2.0
 
-# Set Up. #
+## Simple Extension
 
-1. Firstly, set up your machine to be able to host an Apache server using an application like MAMP or XAMPP.
-2. Place the "checkout.php" file into the htdocs folder of XAMPP.
-3. Edit your hosts file to map '127.0.0.1' to 'dev.supremenewyork.com'.
-3. In firefox, go to "about:debugging" and click "Load Temporary Add-on".
-4. Then click any file in the directory of this repo(by default the root folder should be called sup_script).
-5. Go to "about:addons", and under the add-on, click "Options" to access option menu.
-7. Don't edit the code.
-8. Desired size means it will only check out that size.
+### Overview
 
-# Drop Day Instructions. #
-* **[WARNING] Version 1.2 has not been tested with real credentials, so could either not work, or work incorrectly. Use at your own risk. [WARNING]**
-### Manual Captcha Setting ###
-1. In the Firefox add-on settings, you can set "Use Above Token" to 'true' and press "Save", to enter your desired re-captcha response token.
-2. Upon visiting "dev.supremenewyork.com/checkout.php" you will simply complete a captcha(no earlier than 2 minutes before drop).
-3. Copy the response that is displayed in the text box, and enter it into the "Google Captcha Token" field on the add-on options and press "Save".
-### Auto Captcha Setting ###
-1. In the Firefox add-on settings, you can set "Use Above Token" to 'false' and press "Save", to have the captcha field populated automatically.
-2. Upon visiting "dev.supremenewyork.com/checkout.php" you will have to enter the filepath to the root directory of the add on folder using "Update Extension Filepath" button.
-3. Complete a captcha no earlier than 2 minutes prior to the drop, and use the add-on as per usual.
+This extension is for Firefox **only** . It will save your auto-fill details, and upon clicking on a product, it will add the desired size to cart take user to the checkout page, and autofill details.
 
-### Modes ###
-* [0] Complete Checkout - Script will attempt to checkout an item fully for you.
-* [1] Go to Cart (with Captcha) - Script will take you to the checkout page, and replace the captcha response input on the checkout form, but **will not** complete checkout.
-* [2] Go to Cart (without Captcha) - Script will take you to checkout page, but you will be required to complete a captcha to checkout as the script will only attempt to autofill your details.
+### Installation/Set-Up
 
+1. First open Firefox and go to the URL: "about:debugging".
+
+2. Click "Load Temporary Add-on", and navigate to the *Simple Extension* folder inside this repo.
+
+3. Select any file and click "Open".
+
+4. The extension is now loaded into Firefox and will be running. To change settings go to the URL: "about:addons".
+
+5. Under the Extension listing, click "Options".
+
+6. Enter your details and press "Save".
+
+7. Now if you click on a product on supreme's webstore, it will add to cart in specified size and take you to the checkout page.
+
+
+## Advanced Extension
+
+### Overview
+
+* This extension requires more experience and knowledge of computing to use
+* Complete_checkout has not been extensively tested for this extension
+
+This extension can be used in either Firefox or Chrome. It will save your auto-fill details, and upon clicking on a product it will add the desired size to cart, and take the user to the checkout page. With complete_checkout/captcha bypass enabled, the script can also bypass captcha and complete the order automatically. This extension is significantly quicker/more efficient at adding to cart and autofilling.
+
+### Installation/Set-Up
+
+1. First open Firefox and go to the URL: "about:debugging" [OR] Open Chrome and go to the URL: "chrome://extensions/".
+
+2. In Firefox click "Load Temporary Add-on", and navigate to the *Simple Extension* folder inside this repo [OR] In Chrome click "Developer mode" and click "Load unpacked extension..." and navigate to the *Simple Extension* folder inside this repo.
+
+3. In Firefox, select any file in the folder and click "Open" [OR] In Chrome just select the "Advanced Extension" folder and click "OK".
+
+4. The extension is now loaded into Firefox/Chrome and will be running.
+
+5. In order to enter your autofill details and change settings, you must host an Apache server on your machine in order to access the settings webpage.
+
+6. Once you have an Apache server running, place the "checkout.php" and "savedata.php" files into the htdocs folder of your Apache application.
+
+7. Change your hosts file to include the mapping of 127.0.0.1 to dev.supremenewyork.com
+
+8. Access "dev.supremenewyork.com/checkout.php" to change settings and get further instructions for use.
+ 
 ###Note###
-A captcha response is only valid for **one** cart checkout.
+* Do not use both extensions at the same time.
+* A captcha response is only valid for **one** cart checkout.
