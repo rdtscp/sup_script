@@ -26,7 +26,7 @@ This extension is for Firefox **only** . It will save your auto-fill details, an
 
 6. Enter your details and press "Save".
 
-7. Now if you click on a product on supreme's webstore, it will add to cart in specified size and take you to the checkout page.
+7. Now if you click on a product on supreme's webstore, it will add to cart in specified size and take you to the checkout page and autofill your details.
 
 
 ## Advanced Extension
