@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pre Captcha Supreme</title>
+	<title>Advanced ATC Settings</title>
 	<style>
 		h1 {text-align:center;}
 		h2 {text-align:center;}
@@ -50,28 +50,20 @@
 	<div style="text-align: center; margin: auto;">
 		<h1> Introduction </h1>
 		<p>
-			This software comes with two components. A firefox/chrome extension, and a webpage UI. The extension can be used <br />
-			as standalone to automate most of the add-to-cart and checkout process on supreme's website, however with use of the <br />
-			webpage UI, you can further the efficiency of the extension.
+			The Advanced Supreme ATC extension must be configured through this webpage. <br>
+			The two checkboxes below "Show User Data Form" and "Show Captcha Bypass" show/hide the corresponding sections for user input.<br>
+			The extension works by having this webpage inject your options into the sourcecode of the extension in order to improve efficiency.
 		</p>
-		<h2><u>Modes</u></h2>
+		<h2><u>Usage</u></h2>
 		<p>
-			The three main ways the extension can be used are as follows: <br />
-			- <b>Standalone</b>:<br />
-			Standalone extension will only automate adding to cart, entering checkout page, and autofilling details. <br />
-			Processing of payment MUST be done by user.<br /><br />
-
-			- <b>Efficient User Data</b>:<br />
-			If you want to completely bypass loading of user data through the extension, hosting the included <br />
-			webpages(as detailed in the README), will allow you to 'hardcode' your auto-fill/size preferences <br />
-			to speed up performance.<br /><br />
-
-			- <b>Captcha Bypass</b>:<br />
-			If you want to make use of the captcha bypassing, you must host the webpage and follow the appropriate<br />
-			instructions. <b>Captcha Bypass</b> includes all features of <b>Standalone</b> by default.<br /><br />
-
-			<b>The default settings only use <i>Standalone</i>. You must enable other features if you wish to use them.</b>
-
+			Before doing anything you need to set the filepath for your extension(i.e. tell this webpage where to find the files to inject details/settings into.). <br>
+			First click "Update Extension Filepath" and supply the root directory of the Extension. It will look something like:<br><br>
+			~/sup_script/Advanced Extension
+			<br><br>
+			In order for the Extension to autofill you're details/know your size preference, you must fill out the "User Data Form" and save the Details/Settings. <br/>
+			To bypass captcha, Simply complete a captcha less than 2 minutes before the intended checkout time(i.e. drop) and click "Transfer Google Captcha Token". <br>
+			If using paypal, you do not need to fill out the card number/expiry/cvv info. <br>
+			Updating the User Data form will erase the Captcha bypass from the extension, so to have working captcha bypass, it must be the final setting you change.
 		</p>
 		<br/>
 		<hr>
