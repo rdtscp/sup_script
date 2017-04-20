@@ -5,6 +5,7 @@
 
 * Firefox/Chrome Extension to simulate one click add-to-cart/checkout on supremenewyork
 * Version 2.0
+* Overview of what script is doing can be seen by viewing webpage console.
 
 ## Simple Extension
 
