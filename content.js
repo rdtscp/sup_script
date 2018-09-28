@@ -1,34 +1,32 @@
 /*
-*
-* アレックス
-* 亚历克斯
-* Alexander Wilson
-*                 _ _             ___  __ 
-*  __ _ ____ __ _(_) |___ ___ _ _/ _ \/ / 
-* / _` / _\ V  V / | (_-</ _ \ ' \_, / _ \
-* \__,_\__|\_/\_/|_|_/__/\___/_||_/_/\___/
-*                                        
-*
-*/
-var UKname;
-var UKemail;
-var UKtel;
-var UKaddr1;
-var UKaddr2;
-var UKaddr3;
-var UKcity;
-var UKpostcode;
-var UKcountry;
-var UKcardtype;
-var UKcardnumb;
-var UKcnv;
-var UKexpmonth;
-var UKexpyear;
-var desiredSize;
+ *
+ *                 _ _             ___  __ 
+ *  __ _ ____ __ _(_) |___ ___ _ _/ _ \/ / 
+ * / _` / _\ V  V / | (_-</ _ \ ' \_, / _ \
+ * \__,_\__|\_/\_/|_|_/__/\___/_||_/_/\___/
+ *                                        
+ *
+ */
+
+let UKname;
+let UKemail;
+let UKtel;
+let UKaddr1;
+let UKaddr2;
+let UKaddr3;
+let UKcity;
+let UKpostcode;
+let UKcountry;
+let UKcardtype;
+let UKcardnumb;
+let UKcnv;
+let UKexpmonth;
+let UKexpyear;
+let desiredSize;
 
 // Go to checkout page.
 function goToCart() {
-    window.location.href="http://www.supremenewyork.com/checkout"
+    window.location.href="http://www.supremenewyork.com/checkout";
 	console.log("    ✔ Opened checkout page");
 	console.log("---------------------------------------------------------");
 	console.log("---THIS CONSOLE MAY NOT SHOW ACTIVITY ON CHECKOUT PAGE---");
@@ -43,7 +41,7 @@ function onError(error) {
 
 // Retrieves user data and starts script.
 function onGot(item) {
-	console.log("Getting user details.")
+	console.log("Getting user details.");
 	UKname 		=	item.order_billing_name;
 	console.log("    ✔ Name = " + item.order_billing_name);
 	UKemail 	=	item.order_email;
@@ -60,31 +58,31 @@ function onGot(item) {
 	UKexpmonth 	= 	item.credit_card_month;
 	UKexpyear 	= 	item.credit_card_year;
 	desiredSize = 	item.size;
-	console.log("    ✔ Obtained user details")
+	console.log("    ✔ Obtained user details");
 
-	var pathname 		= window.location.pathname;
-	var pathname_first 	= pathname.substring(0,5);
-	var pathname_second = pathname.substring(0,9);
+	let pathname 		= window.location.pathname;
+	let pathname_first 	= pathname.substring(0,5);
+	let pathname_second = pathname.substring(0,9);
 
 	if (pathname != "/checkout" && pathname.length > 25) {	// If we are on product page.
-		console.log("[STATUS]: On product page.")
+		console.log("[STATUS]: On product page.");
 		console.log("Attemping to set size to " + desiredSize);
-		var add_to_cart = setInterval( function() {
+		let add_to_cart = setInterval( function() {
 			if (document.getElementById("cart-remove")) {
 				console.log("    ✔  ADDED TO CART");
 				console.log("Attempting to visit checkout page...");
 				clearInterval(add_to_cart);
 				goToCart();
 			}
-			var sizeList = document.getElementById("size");
-			var currentSize = sizeList.options[sizeList.selectedIndex].textContent;
-			var currentSizeId = sizeList.options[sizeList.selectedIndex].value;
+			let sizeList = document.getElementById("size");
+			let currentSize = sizeList.options[sizeList.selectedIndex].textContent;
+			let currentSizeId = sizeList.options[sizeList.selectedIndex].value;
 			console.log("Current Size = " + currentSize +". Desired Size = " + desiredSize);
 			if (currentSize != desiredSize) {
 				sizeList.value = parseInt(currentSizeId) + 1;
 			}
 			if (currentSize == desiredSize) {
-				console.log("Attempting to ADD-TO-CART.")
+				console.log("Attempting to ADD-TO-CART.");
 				document.getElementsByTagName('input')[2].click();
 				console.log("Clicked ADD-TO-CART");
 			}
@@ -107,9 +105,7 @@ function onGot(item) {
 
 }
 
-console.log("test");
-
-var getting = browser.storage.local.get(
+let getting = chrome.storage.local.get(
 	[
 	"order_billing_name",
 	"order_email",
@@ -133,7 +129,7 @@ var getting = browser.storage.local.get(
 getting.then(onGot, onError);
 
 
-var check_page = setInterval( function(){
+let check_page = setInterval( function(){
 	if (document.getElementById("size")) {
 		getting.then(onGot, onError);
 		clearInterval(check_page);
