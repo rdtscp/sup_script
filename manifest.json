@@ -7,17 +7,14 @@
     "default_icon": "icon.png"
   },
   "permissions": [
-    "tabs",
     "activeTab",
-    "sessions",
-    "background",
     "storage"
   ],
   "options_ui": {
     "page": "options.html"
   },
   "content_scripts": [{
-      "matches": ["*://*/*"],
-      "js": ["content.js"]
-    }]
+      "matches": [ "http://*.supremenewyork.com/*", "https://*.supremenewyork.com/*" ],
+      "js": [ "content.js" ]
+  }]
 }
