@@ -19,30 +19,24 @@ const saveOptions = (e) => {
   }});
 };
 
-const setCurrentChoice = (result) => {
-  document.querySelector("#order_billing_name").value       = result.order_billing_name || "";
-  document.querySelector("#order_email").value              = result.order_email || "";
-  document.querySelector("#order_tel").value                = result.order_tel || "";
-  document.querySelector("#bo").value                       = result.bo || "";
-  document.querySelector("#oba3").value                     = result.oba3 || "";
-  document.querySelector("#order_billing_address_3").value  = result.order_billing_address_3 || "";
-  document.querySelector("#order_billing_city").value       = result.order_billing_city || "";
-  document.querySelector("#order_billing_zip").value        = result.order_billing_zip || "";
-  document.querySelector("#order_billing_country").value    = result.order_billing_country || "GB";
+const setCurrentChoice = (config) => {
+  document.querySelector("#order_billing_name").value       = config.order_billing_name || "";
+  document.querySelector("#order_email").value              = config.order_email || "";
+  document.querySelector("#order_tel").value                = config.order_tel || "";
+  document.querySelector("#bo").value                       = config.bo || "";
+  document.querySelector("#oba3").value                     = config.oba3 || "";
+  document.querySelector("#order_billing_address_3").value  = config.order_billing_address_3 || "";
+  document.querySelector("#order_billing_city").value       = config.order_billing_city || "";
+  document.querySelector("#order_billing_zip").value        = config.order_billing_zip || "";
+  document.querySelector("#order_billing_country").value    = config.order_billing_country || "GB";
 
-  document.querySelector("#credit_card_type").value         = result.credit_card_type || "visa";
-  document.querySelector("#cnb").value                      = result.cnb || "";
-  document.querySelector("#credit_card_month").value        = result.credit_card_month || "04";
-  document.querySelector("#credit_card_year").value         = result.credit_card_year || "2017";
-  document.querySelector("#vval").value                     = result.vval || "";
-  document.querySelector("#size").value                     = result.size || "Large";
+  document.querySelector("#credit_card_type").value         = config.credit_card_type || "visa";
+  document.querySelector("#cnb").value                      = config.cnb || "";
+  document.querySelector("#credit_card_month").value        = config.credit_card_month || "04";
+  document.querySelector("#credit_card_year").value         = config.credit_card_year || "2017";
+  document.querySelector("#vval").value                     = config.vval || "";
+  document.querySelector("#size").value                     = config.size || "Large";
 };
 
-const restoreOptions = () => {
-  chrome.storage.local.get('autofill')
-  .then(setConfigFields)
-  .catch(error => console.error(error));
-};
-
-document.addEventListener("DOMContentLoaded", restoreOptions);
+document.addEventListener("DOMContentLoaded", chrome.storage.local.get(['autofill'], setCurrentChoice));
 document.querySelector("form").addEventListener("submit", saveOptions);
