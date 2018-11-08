@@ -102,7 +102,7 @@ const onReceiveConfig = (config) => {
 			}
 
 			// Set the Size & Add to Cart.
-			if (autofill.desiredSize === undefined)
+			if (autofill.desiredSize === "None")
 				return;
 			console.log('Attemping to set size to ' + autofill.desiredSize);
 			let sizeList			= document.getElementById('size');
